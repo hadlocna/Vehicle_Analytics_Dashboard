@@ -101,11 +101,33 @@
         font-size: 14px;
 
       }
+
+      #button-graph {
+        border:1px solid #3866a3;
+        display:inline-block;
+        color:#14396a;
+        font-family:Verdana;
+        font-size:13px;
+        font-weight:bold;
+        font-style:normal;
+        height:44px;
+        line-height:44px;
+        width:154px;
+        text-decoration:none;
+        text-align:center;
+        text-shadow:1px 1px 0px #7cacde;
+      }
+
+      #button-ad {
+        margin-left: 20px;
+      }
+
+
     </style>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization,drawing"></script>
 
-    <button onclick="transition()">Update</button>
+    <button id='button-graph' onclick="transition()">Previous Month</button>
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
 
@@ -756,7 +778,7 @@ function bumpLayer(n) {
 
   </head>
   <body>
-    <div id="graph-legend"><h1>Miles Traveled Per Driver</h1></div>
+    <div id="graph-legend"><h1>Deliveries Per Driver</h1></div>
     <div id="business-predictive">
       <p> Estimated Required Drivers: 5 </p>
     </div>
@@ -778,6 +800,7 @@ function bumpLayer(n) {
       <p> Estimated Cost Per Trip: $1.78 </p>
     </div>
     <div id="advertising"><div id="map-ad-canvas"></div>
-    <h1 id="ad-text"> Select an Advertising Area</h1></div>
+    <h1 id="ad-text"> Select an Advertising Area</h1>
+    <button id='button-ad'>Save Area</button></div>
   </body>
 </html>
