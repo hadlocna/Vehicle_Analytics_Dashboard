@@ -116,6 +116,7 @@
         text-decoration:none;
         text-align:center;
         text-shadow:1px 1px 0px #7cacde;
+        float: left;
       }
 
       #button-ad {
@@ -126,6 +127,9 @@
     </style>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization,drawing"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
 
     <button id='button-graph' onclick="transition()">Previous Month</button>
     <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -705,38 +709,18 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-//Drag and Drop
-function (){
-
-  var dragSrcEl_ = null;
-
-  this.handleDragStart = function (e){
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html',this.innerHTML);
-    dragSrcEl_ = this;
-    this.style.opacity = '0.5';
-    this.addClassName('moving');
-  };
-
-  this.handleDragOver = function (e) {
-    if (e.preventDefault){
-      e.preventDefault();
-    }
-    e.dataTransfer.dropEffect = 'move';
-    return false;
-  };
-
-  this.handleDragEnter = function
-
-}
+$(function() {
+    $( "#draggable-area" ).sortable();
+    $( "#draggable-area" ).disableSelection();
+  });
 
 var n = 10, // number of layers
-    m = 100, // number of samples per layer
+    m = 300, // number of samples per layer
     stack = d3.layout.stack().offset("wiggle"),
     layers0 = stack(d3.range(n).map(function() { return bumpLayer(m); })),
     layers1 = stack(d3.range(n).map(function() { return bumpLayer(m); }));
 
-var width = 960,
+var width = 700,
     height = 500;
 
 var x = d3.scale.linear()
@@ -803,10 +787,11 @@ function bumpLayer(n) {
   </head>
   <body>
     <div id="graph-legend"><h1>Deliveries Per Driver</h1></div>
-    <div id="business-predictive" draggable="true">
+    <div id="draggable-area">
+    <div id="business-predictive" class="box">
       <p> Estimated Required Drivers: 5 </p>
     </div>
-    <div id="stats" draggable="true">
+    <div id="stats" class="box">
       <div id="map-canvas1"></div>
       <h1> Driver # 246 </h1>
       <p> Trips Today: 9 </p>
@@ -815,7 +800,7 @@ function bumpLayer(n) {
       <p> Estimated Cost Per Trip: $1.27 </p>
     </div>
 
-    <div id="stats" draggable="true">
+    <div id="stats" class="box">
       <div id="map-canvas2"></div>
       <h1> Driver # 247 </h1>
       <p> Trips Today: 11 </p>
@@ -823,7 +808,8 @@ function bumpLayer(n) {
       <p> Average Speed: 9.8 mph </p>
       <p> Estimated Cost Per Trip: $1.78 </p>
     </div>
-    <div id="advertising" draggable="true"><div id="map-ad-canvas"></div>
+  </div>
+    <div id="advertising" class="box"><div id="map-ad-canvas"></div>
     <h1 id="ad-text"> Select an Advertising Area</h1>
     <button id='button-ad'>Save Area</button></div>
   </body>
