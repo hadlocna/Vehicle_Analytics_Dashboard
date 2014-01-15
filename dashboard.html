@@ -663,7 +663,6 @@ function initialize() {
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
       drawingModes: [
-        google.maps.drawing.OverlayType.POLYGON,
         google.maps.drawing.OverlayType.RECTANGLE
       ]
     }
@@ -673,10 +672,11 @@ function initialize() {
   google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
   if (event.type == google.maps.drawing.OverlayType.RECTANGLE) {
     var bounds = event.overlay.getBounds();
+    var adViews = document.querySelector('#ad-text');
     var fa_distance = bounds.fa.b - bounds.fa.d;
     var la_distance = bounds.la.d - bounds.la.b;
     var views = fa_distance * la_distance * 10000000;
-    console.log(views);
+    adViews.innerHTML = 'Estimated ' + Math.floor(views) + ' Views Per Day'
   }
 });
 }
@@ -778,6 +778,6 @@ function bumpLayer(n) {
       <p> Estimated Cost Per Trip: $1.78 </p>
     </div>
     <div id="advertising"><div id="map-ad-canvas"></div>
-    <h1> Select an Advertising Area</h1></div>
+    <h1 id="ad-text"> Select an Advertising Area</h1></div>
   </body>
 </html>
